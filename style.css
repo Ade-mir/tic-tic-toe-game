@@ -45,6 +45,47 @@ h2:hover {
   cursor: default;
 }
 
+/* INFO */
+
+#info {
+  text-align: center;
+  width: 15rem;
+  color: var(--text-gold);
+}
+
+#info__title {
+  font-size: 2rem;
+}
+
+.info__player {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: var(--border);
+  color: var(--dark);
+  background: var(--bg-white);
+}
+
+.info__player__icon {
+  height: 1.3rem;
+  padding-top: 0.13rem;
+}
+
+.cross {
+  background-image: url(assets/cross.png);
+}
+
+.circle {
+  background-image: url(assets/circle.png);
+}
+
+.cross,
+.circle {
+  background-size: cover;
+}
+
 /* GRID */
 
 #grid {
@@ -59,11 +100,116 @@ h2:hover {
 }
 
 .grid__square {
-  background: var(--bg-white);
+  background-color: var(--bg-white);
   border-radius: 0.3rem;
   border: var(--border);
 }
 
 .grid__square:hover {
   cursor: pointer;
+}
+
+/* INSTRUCTIONS */
+
+#instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15rem;
+}
+
+#instructions__text {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-white);
+}
+
+#instructions__btn {
+  cursor: pointer;
+  width: 10rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  background: var(--dark);
+  border: var(--border);
+  color: var(--text-white);
+}
+
+#instructions__btn:active {
+  transform: translateY(0.125rem);
+}
+
+/* MODAL */
+
+#modal {
+  display: none;
+  align-items: center;
+  position: absolute;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: var(--bg-modal);
+}
+
+#modal__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65%;
+  width: 40%;
+  border-radius: 5rem;
+  color: var(--text-white);
+  background: var(--bg-red);
+  border: var(--dark) solid 0.1rem;
+}
+
+/* FORM */
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  display: none;
+}
+
+input {
+  margin: 1.25rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  padding: 0.625rem 1.25rem;
+}
+
+::placeholder {
+  font-style: italic;
+}
+
+input[type="submit"]:active {
+  transform: translateY(0.125rem);
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 1100px) {
+  #grid {
+    width: 18.75rem;
+    height: 18.75rem;
+  }
+  #info__title {
+    margin: 0 0 1rem;
+  }
+  body {
+    align-content: center;
+  }
+  #modal__content {
+    text-align: center;
+    height: 60%;
+    width: 80%;
+  }
+  input {
+    width: 10rem;
+  }
 }

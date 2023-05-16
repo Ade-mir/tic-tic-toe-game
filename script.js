@@ -86,12 +86,10 @@ function checkForWin() {
     [squareThree, squareFive, squareSeven],
   ];
   for (const line of lines) {
-    const hasCross = line.every((square) => {
-      square.classList.contains("cross");
-    });
-    const hasCircle = line.every((square) => {
-      square.classList.contains("circle");
-    });
+    const hasCross = line.every((square) => square.classList.contains("cross"));
+    const hasCircle = line.every((square) =>
+      square.classList.contains("circle")
+    );
     if (hasCross || hasCircle) {
       const winner = hasCross ? players.playerOne : players.playerTwo;
       winner.wins += 1;
@@ -139,3 +137,75 @@ function checkForTie() {
     continueGame();
   }
 }
+
+// CONTINUE / RESTART / RESET
+
+function continueGame() {
+  removeSquareClick();
+  setTimeout(() => {
+    reset();
+  }, 2000);
+}
+
+function restartGame() {
+  removeSquareClick();
+  reset();
+}
+
+function reset() {
+  allSquares.forEach((square) => {
+    square.classList = "grid__square";
+  });
+  addSquareClick();
+  playerHasWon = false;
+  infoText.innerHTML = `${nextPlayer}'s turn to start`;
+}
+
+// START GAME
+
+function startGame() {
+  startGameBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+
+  const form = document.querySelector("form");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const player1Input = document
+      .getElementById("player1")
+      .value.trim()
+      .toLowerCase();
+    const player2Input = document
+      .getElementById("player2")
+      .value.trim()
+      .toLowerCase();
+
+    const player1InputCap =
+      player1Input.charAt(0).toUpperCase() + player1Input.slice(1);
+    const player2InputCap =
+      player2Input.charAt(0).toUpperCase() + player2Input.slice(1);
+
+    players.playerOne.name = player1InputCap;
+    players.playerTwo.name = player2InputCap;
+    nextPlayer = player1InputCap;
+
+    document.getElementById("info__player__name1").innerHTML =
+      players.playerOne.name;
+    document.getElementById("info__player__name2").innerHTML =
+      players.playerTwo.name;
+
+    players.playerOne.wins = 0;
+    players.playerTwo.wins = 0;
+    updateScores();
+
+    infoText.innerHTML = `${players.playerOne.name}'s turn to start`;
+    modal.style.display = "none";
+
+    startGameBtn.innerHTML = "Restart Game";
+    addSquareClick();
+    restartGame();
+  });
+}
+
+startGame();
